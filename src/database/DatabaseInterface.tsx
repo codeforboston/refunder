@@ -7,12 +7,12 @@ export interface RejectFunc {
 }
 
 export interface ExecutorFunction {
-  (resolve: ResolveFunc, reject: RejectFunc): void; 
+  (resolve: ResolveFunc, reject: RejectFunc): void;
 }
 
 export abstract class Database {
   // The executor for downloading the database. Same interface as a Promise executor.
-  abstract dbDownloadExecutor(resolve: ResolveFunc, reject: RejectFunc): void; 
+  abstract dbDownloadExecutor(resolve: ResolveFunc, reject: RejectFunc): void;
 
   // The main method: used to get the data from the database, always as a promise
   getData(): Promise<unknown> {

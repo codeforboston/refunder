@@ -16,7 +16,7 @@ interface LineItemProps {
 }
 
 export class LineItem extends Component<LineItemProps, LineItemState> {
-  constructor(props : LineItemProps) {
+  constructor(props: LineItemProps) {
     super(props);
     this.state = {
       year: props.obj['Fiscal Year'],
