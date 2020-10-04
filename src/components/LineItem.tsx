@@ -32,11 +32,32 @@ export class LineItem extends Component<LineItemProps, LineItemState> {
 
   render(): ReactNode {
     return (
-      <p>Year: {this.state.year}, Service: {this.state.service},
-         Department: {this.state.departmentName}, Division: {this.state.divisionName},
-         Category: {this.state.category}, Description: {this.state.description},
-         Amount: ${this.state.amount}, Fund: {this.state.fund}
-      </p>
+      <tr>
+        <td>
+          {this.state.year}
+        </td>
+        <td>
+          {this.state.service}
+        </td>
+        <td>
+          {this.state.departmentName}
+        </td>
+        <td>
+          {this.state.divisionName}
+        </td>
+        <td>
+          {this.state.category}
+        </td>
+        <td>
+          {this.state.description}
+        </td>
+        <td>
+          ${this.state.amount}
+        </td>
+        <td>
+          {this.state.fund}
+        </td>
+      </tr>
     )
   }
 };

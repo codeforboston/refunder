@@ -1,5 +1,4 @@
 import React from 'react';
-import logo from './logo.svg';
 import { AppContainer } from './components/AppComponent';
 import './App.css';
 
