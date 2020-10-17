@@ -2,41 +2,33 @@ import React, { Component, ReactNode } from "react";
 import { MainDatabase } from "../database/googleSheetsDatabase";
 import { LineItem } from "./LineItem";
 
+interface BudgetTableProps {
+  lineItems: any[]; 
+}
+
 interface BudgetTableState {
-  sortedLineItems: any[];
   sortingBy: string;
   sortingOrder: number; // ascending is 0, descending is 1
   page: number;
 }
 
-export class BudgetTable extends Component<{}, BudgetTableState> {
-  constructor(props: any) {
+export class BudgetTable extends Component<BudgetTableProps, BudgetTableState> {
+  constructor(props: BudgetTableProps) {
     super(props);
-    // Start out sorted by fiscal year
     this.state = {
-      sortedLineItems : [],
       sortingBy: 'Fiscal Year',
       sortingOrder: 0,
       page: 0
     };
   }
 
-  componentDidMount() {
-    let db = new MainDatabase();
-    db.getData().then((lineItems : any) => {
-      console.log(lineItems);
-      let defaultSorted = lineItems.slice(0, 1000);
-      defaultSorted.sort((a: any, b: any) => a[this.state.sortingBy] - b[this.state.sortingBy]);
-      this.setState({
-        sortedLineItems: defaultSorted,
-        sortingBy: 'Fiscal Year',
-        sortingOrder: 0,
-        page: 0
-      });
-    });
-  }
-
   render() : ReactNode {
+    // TODO(brycew): consider memoization if this is slow.
+    // https://reactjs.org/blog/2018/06/07/you-probably-dont-need-derived-state.html#what-about-memoization
+    // Start out sorted by fiscal year
+    let defaultSorted = this.props.lineItems;
+    defaultSorted.sort((a: any, b: any) => a[this.state.sortingBy] - b[this.state.sortingBy]);
+
     const countPerPage = 100;
     let itemStart = this.state.page * countPerPage;
     let itemEnd = (this.state.page + 1) * countPerPage;
@@ -55,8 +47,8 @@ export class BudgetTable extends Component<{}, BudgetTableState> {
         </tr>
         </thead>
         <tbody>
-        {this.state.sortedLineItems.slice(itemStart, itemEnd).map((item : any) => 
-        <LineItem key={item['Fiscal Year'] + item['Division Name'] + item['Description'] + item['Amount']}
+        {defaultSorted.slice(itemStart, itemEnd).map((item : any) => 
+        <LineItem key={item['Fiscal Year'] + item['Department Name'] + item['Division Name'] + item['Description'] + item['Amount']}
                   obj={item}>
         </LineItem>)}
         </tbody>
