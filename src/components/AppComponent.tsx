@@ -1,7 +1,8 @@
 import React, { Component, ReactNode } from "react";
 import { MainDatabase } from "../database/googleSheetsDatabase";
-import { BudgetTable } from './BudgetTable';
 import { BudgetViewSelector } from './BudgetViewSelector';
+import { BudgetTable } from './visualization/BudgetTable';
+import { BarCharts } from './visualization/BarChart';
 
 interface AppContainerState {
   lineItems: any[];
@@ -19,7 +20,7 @@ export class AppContainer extends Component<{}, AppContainerState> {
     let db = new MainDatabase();
     db.getData().then((lineItems : any) => {
       console.log(lineItems);
-      lineItems = lineItems.filter((item: any) => item['Fiscal Year'] == fiscalYear);
+      lineItems = lineItems.filter((item: any) => item['Fiscal Year'] === fiscalYear);
       console.log(lineItems);
       this.setState({
         lineItems: lineItems,
@@ -38,10 +39,10 @@ export class AppContainer extends Component<{}, AppContainerState> {
 
   render(): ReactNode {
     let viewComponent;
-    if (this.state.viewSelected == 'table') {
+    if (this.state.viewSelected === 'table') {
       viewComponent = <BudgetTable lineItems={this.state.lineItems}></BudgetTable>;
-    } else if (this.state.viewSelected == 'barChart') {
-      viewComponent = <p>Bar chart in progress</p>;
+    } else if (this.state.viewSelected === 'barChart') {
+      viewComponent = <BarCharts width={ 100 } height={ 100 }></BarCharts>;
     } else {
       viewComponent = <p>{this.state.viewSelected} coming soon!</p>
     }

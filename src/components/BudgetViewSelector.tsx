@@ -1,4 +1,4 @@
-import React, { Component, ReactNode } from "react";
+import React, { Component } from "react";
 
 interface BudgetVSProps {
   onSelectorChoice(value: any): void;
@@ -31,5 +31,4 @@ export class BudgetViewSelector extends Component<BudgetVSProps, BudgetVSState> 
       </select>
     )
   }
-
 };

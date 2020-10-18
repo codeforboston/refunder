@@ -1,5 +1,4 @@
 import React, { Component, ReactNode } from "react";
-import { MainDatabase } from "../database/googleSheetsDatabase";
 import { LineItem } from "./LineItem";
 
 interface BudgetTableProps {
