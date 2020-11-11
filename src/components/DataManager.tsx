@@ -25,6 +25,8 @@ export class DataManager extends Component<DataManagerProps, {}> {
       }
     }
     
+    // TODO: add on click handle from the bar charts, giving what bar was clicked,
+    // handle it in here
     return (
       <BarCharts width={800} height={400} labels={labels} values={summed_data}></BarCharts>
     );

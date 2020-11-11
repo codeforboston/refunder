@@ -13,7 +13,7 @@ interface AppContainerState {
 export class AppContainer extends Component<{}, AppContainerState> {
   constructor(props: any) {
     super(props);
-    let fiscalYear = 2019;
+    let fiscalYear = 2018;
     this.handleViewChange = this.handleViewChange.bind(this);
     this.state = {lineItems: [], fiscalYear: fiscalYear, viewSelected: "table"};
   }
