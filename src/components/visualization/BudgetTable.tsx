@@ -2,7 +2,7 @@ import React, { Component, ReactNode } from "react";
 import { LineItem } from "./LineItem";
 
 interface BudgetTableProps {
-  lineItems: any[]; 
+  lineItems: any[];
 }
 
 interface BudgetTableState {
@@ -10,6 +10,8 @@ interface BudgetTableState {
   sortingOrder: number; // ascending is 0, descending is 1
   page: number;
 }
+
+const countPerPage = 100;
 
 export class BudgetTable extends Component<BudgetTableProps, BudgetTableState> {
   constructor(props: BudgetTableProps) {
@@ -19,6 +21,22 @@ export class BudgetTable extends Component<BudgetTableProps, BudgetTableState> {
       sortingOrder: 0,
       page: 0
     };
+    this.handlePageChange = this.handlePageChange.bind(this);
+  }
+
+  handlePageChange(valueChange: number) {
+    const maxCount = this.calcMaxPage(this.props.lineItems.length);
+    console.log('MaxCount: ' + maxCount);
+    let newPage = Math.max(0, Math.min(maxCount, this.state.page + valueChange));
+    this.setState({
+      sortingBy: this.state.sortingBy,
+      sortingOrder: this.state.sortingOrder,
+      page: newPage
+    });
+  }
+
+  calcMaxPage(lineItemCount: number) : number {
+    return Math.ceil(lineItemCount / countPerPage);
   }
 
   render() : ReactNode {
@@ -28,10 +46,14 @@ export class BudgetTable extends Component<BudgetTableProps, BudgetTableState> {
     let defaultSorted = this.props.lineItems;
     defaultSorted.sort((a: any, b: any) => a[this.state.sortingBy] - b[this.state.sortingBy]);
 
-    const countPerPage = 100;
+    console.log(this.state.page);
     let itemStart = this.state.page * countPerPage;
     let itemEnd = (this.state.page + 1) * countPerPage;
     return (
+      <div>
+      <button onClick={() => this.handlePageChange(-1) }>Prev</button>
+      <div>{ this.state.page } / { this.calcMaxPage(defaultSorted.length) }</div>
+      <button onClick={() => this.handlePageChange(1) }>Next</button>
       <table>
         <thead>
         <tr>
@@ -46,12 +68,13 @@ export class BudgetTable extends Component<BudgetTableProps, BudgetTableState> {
         </tr>
         </thead>
         <tbody>
-        {defaultSorted.slice(itemStart, itemEnd).map((item : any) => 
+        {defaultSorted.slice(itemStart, itemEnd).map((item : any) =>
         <LineItem key={item['Fiscal Year'] + item['Department Name'] + item['Division Name'] + item['Description'] + item['Amount']}
                   obj={item}>
         </LineItem>)}
         </tbody>
       </table>
+    </div>
     )
   }
 };
