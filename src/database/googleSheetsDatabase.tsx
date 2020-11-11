@@ -2,7 +2,7 @@ import { parse } from 'papaparse';
 import { ResolveFunc, RejectFunc, Database } from './DatabaseInterface';
 
 // The key from the CFB hosted sheet, not yet published to the web though
-const key = '1uU_XuPUYlJbjhW13rBK_gOVdgc32u6iv-PbkJvZ-g3g';
+// const key = '1uU_XuPUYlJbjhW13rBK_gOVdgc32u6iv-PbkJvZ-g3g';
 // The key from the same dataset, hosted on Bryce's Google Account, published to the web
 const personal_key = '2PACX-1vRUfbGxSFyI7zQs0e7n-ZckeJH3_e7niFh2SLcHFT7Z7lM_82R4Z8lbQVRNU85EKXtpJ7f-WkYT4ZFt';
 

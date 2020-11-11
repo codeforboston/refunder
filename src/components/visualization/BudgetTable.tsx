@@ -69,7 +69,7 @@ export class BudgetTable extends Component<BudgetTableProps, BudgetTableState> {
         </thead>
         <tbody>
         {defaultSorted.slice(itemStart, itemEnd).map((item : any) =>
-        <LineItem key={item['Fiscal Year'] + item['Department Name'] + item['Division Name'] + item['Description'] + item['Amount']}
+        <LineItem key={item['Fiscal Year'] + item['Division Name'] + item['Amount'] + item['Index']}
                   obj={item}>
         </LineItem>)}
         </tbody>

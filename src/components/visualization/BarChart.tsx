@@ -1,7 +1,5 @@
 import React, { Component } from "react";
 import * as d3 from "d3";
-import { isConstructorDeclaration } from "typescript";
-import { render } from "@testing-library/react";
 
 interface BarChartProps {
   width: number;
@@ -52,10 +50,6 @@ class Bars extends Component<BarsProps, {}> {
   }
 
   componentDidMount() {
-    var max_all = Math.max(...this.props.values);
-    var bar_scale_height = d3.scaleLinear().domain([0, max_all]).range([0, this.props.max_bar_height]);
-    var bar_scale_place = d3.scaleLinear().domain([0, max_all]).range([this.props.max_bar_height, 0]);
-
     var t = d3.select(this.myRef.current)
         .selectAll('text')
         .data(this.props.labels);
